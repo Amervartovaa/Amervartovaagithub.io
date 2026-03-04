@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Moje stránka</title>
+
+    <!-- Ručně psaný font -->
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
@@ -10,35 +14,99 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            font-family: Arial, sans-serif;
+            background-color: #FFC0CB; /* baby pink */
+            font-family: 'Patrick Hand', cursive;
+            overflow: hidden;
         }
 
         .card {
-            background: white;
+            position: relative;
+            background: rgba(255, 255, 255, 0.9);
             padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
             text-align: center;
+            max-width: 400px;
+            z-index: 2;
         }
 
         h1 {
-            margin: 0;
-            font-size: 36px;
-            color: #333;
+            font-size: 48px;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 3;
         }
 
         p {
-            margin-top: 15px;
-            font-size: 18px;
-            color: #666;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        img.rat {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* KŮŇ */
+        .horse {
+            position: absolute;
+            bottom: 40px;
+            left: -150px;
+            width: 120px;
+            animation: runJump 6s linear infinite;
+            z-index: 4;
+        }
+
+        @keyframes runJump {
+            0% { left: -150px; bottom: 40px; }
+            40% { bottom: 40px; }
+            50% { bottom: 160px; }
+            60% { bottom: 40px; }
+            100% { left: 100%; bottom: 40px; }
+        }
+
+        /* PENÍZE */
+        .money {
+            position: fixed;
+            top: -50px;
+            font-size: 30px;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+            }
         }
     </style>
 </head>
 <body>
+
     <div class="card">
         <h1>Adéla Mervartová</h1>
         <p>Mám ráda psy.</p>
+        <img class="rat" src="https://images.unsplash.com/photo-1583511655826-05700442b31b" alt="Tlustá krysa">
+        <img class="horse" src="https://media.giphy.com/media/WXB88TeARFVvi/giphy.gif" alt="Kůň">
     </div>
+
+<script>
+    function createMoney() {
+        const money = document.createElement("div");
+        money.classList.add("money");
+        money.innerText = "💸";
+        money.style.left = Math.random() * 100 + "vw";
+        money.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        document.body.appendChild(money);
+
+        setTimeout(() => {
+            money.remove();
+        }, 5000);
+    }
+
+    setInterval(createMoney, 200);
+</script>
+
 </body>
 </html>
